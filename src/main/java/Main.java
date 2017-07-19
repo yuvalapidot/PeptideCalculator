@@ -8,6 +8,7 @@ import org.biojava.nbio.structure.secstruc.SecStrucInfo;
 import org.biojava.nbio.structure.secstruc.SecStrucState;
 import org.biojava.nbio.structure.secstruc.SecStrucTools;
 
+
 import java.io.IOException;
 import java.util.List;
 
@@ -45,11 +46,8 @@ public class Main {
         // finally use BioJava's built in DSSP-like secondary structure assigner
         SecStrucCalc secStrucCalc = new SecStrucCalc();
 
-        List<Chain> chains = s.getChains();
-
         // calculate and assign
         List<SecStrucState> l = secStrucCalc.calculate(s,true);
-        chains = s.getChains();
         printSecStruc(s);
 
     }
