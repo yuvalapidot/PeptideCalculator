@@ -1,16 +1,18 @@
+import calculator.PeptideCalculator;
+import model.Peptide;
 import org.biojava.nbio.structure.Chain;
 import org.biojava.nbio.structure.Structure;
 import org.biojava.nbio.structure.StructureException;
 import org.biojava.nbio.structure.align.util.AtomCache;
 import org.biojava.nbio.structure.io.FileParsingParameters;
-import org.biojava.nbio.structure.secstruc.SecStrucCalc;
-import org.biojava.nbio.structure.secstruc.SecStrucInfo;
-import org.biojava.nbio.structure.secstruc.SecStrucState;
-import org.biojava.nbio.structure.secstruc.SecStrucTools;
+import org.biojava.nbio.structure.secstruc.*;
 
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Main {
 
@@ -31,6 +33,13 @@ public class Main {
 
         // The loaded Structure contains the SS assigned by Author (simple)
         Structure s = cache.getStructure(pdbID);
+        PeptideCalculator calculator = new PeptideCalculator();
+        Set<SecStrucType> secStrucTypes = new HashSet<SecStrucType>();
+        secStrucTypes.add(SecStrucType.helix3);
+        secStrucTypes.add(SecStrucType.helix4);
+        secStrucTypes.add(SecStrucType.helix5);
+        secStrucTypes.add(SecStrucType.bridge);
+        List<Map<String, List<Peptide>>> models = calculator.structureToPeptides(s, 10, 8, 12, 2, 4, secStrucTypes, true);
 
         // Print the Author's assignment (from PDB file)
 //        System.out.println("Author's assignment: ");
